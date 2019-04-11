@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="happy.com.calboard">
+
+<select id="getCalList" parameterType="java.util.Map" resultType="CDto">
+	SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
+	FROM CALBOARD
+	WHERE ID=#{id} AND SUBSTR(MDATE,1,8)=#{yyyyMMdd}
+</select>
+
+<insert id="insertCalBoard" parameterType="CDto">
+	INSERT INTO CALBOARD(SEQ, ID, TITLE, CONTENT, MDATE, REGDATE)
+	VALUES(CALBOARD_SEQ.NEXTVAL, #{id}, #{title}, #{content}, #{mDate}, SYSDATE)
+</insert>
+	
+<select id="getCalView" parameterType="java.util.Map" resultType="java.lang.Integer">
+	SELECT COUNT(*) 
+	FROM CALBOARD
+	WHERE ID=#{id} AND SUBSTR(MDATE,1,8)=#{yyyyMMdd}
+</select>
+
+<select id="getCalViewList" parameterType="java.util.Map" resultType="CDto">
+	SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
+	FROM(SELECT ROW_NUMBER() OVER(PARTITION BY SUBSTR(MDATE,1,8) ORDER BY MDATE) RN,
+			SEQ, ID, TITLE, CONTENT, MDATE, REGDATE 
+			FROM CALBOARD
+			WHERE ID=#{id} AND SUBSTR(MDATE,1,6) = #{yyyyMM})
+	WHERE RN BETWEEN 1 AND 3
+</select>
+
+<select id="getDetail" parameterType="java.lang.String" resultType="CDto">
+	SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
+	FROM CALBOARD
+	WHERE SEQ = #{seq}
+</select>
+
+<update id="modify" parameterType="java.util.Map">
+ 	UPDATE CALBOARD SET CONTENT=#{content} 
+ 	WHERE SEQ=#{seq}
+</update>
+
+<delete id="delete" parameterType="java.lang.String">
+	DELETE FROM CALBOARD WHERE SEQ=#{seq}
+</delete>
+
+</mapper>

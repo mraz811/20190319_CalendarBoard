@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>20190319_CalendarBoard</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>calboard</servlet-name>
+    <servlet-class>happy.com.ctrl.CalController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>calboard</servlet-name>
+    <url-pattern>/CalController.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>modify</servlet-name>
+    <servlet-class>happy.com.ctrl.ModifyCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>modify</servlet-name>
+    <url-pattern>/modify.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>delete</servlet-name>
+    <servlet-class>happy.com.ctrl.DeleteCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete</servlet-name>
+    <url-pattern>/delete.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>del</servlet-name>
+    <servlet-class>happy.com.ctrl.DelCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>del</servlet-name>
+    <url-pattern>/calDel.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>calCountAjax</servlet-name>
+  	<servlet-class>happy.com.ctrl.CalListControllerAjax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>calCountAjax</servlet-name>
+  	<url-pattern>/CalListAjax.do</url-pattern>
+  </servlet-mapping>
+  
+
+  
+  
+  
+  
+</web-app>
